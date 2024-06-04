@@ -13,16 +13,9 @@ const categories = [
   
   // Declare the actions
   const browse = (req,res) => {
-    if (req.query.q ) {
-        const filteredCategories = categories.filter((categorie) =>
-            categorie.name.includes(req.query.q)
-        );
-            res.json(filteredCategories);
-
-    }else{
-        res.json(categories)
+     res.json(categories)
     }
-  };
+
 
   const read = (req,res) => {
     const parseId = parseInt(req.params.id,10);
