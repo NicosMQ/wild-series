@@ -1,3 +1,5 @@
+const tables = require("../../database/tables");
+
 const programs = [
   {
     id: 1,
@@ -23,16 +25,9 @@ const programs = [
 
 // Declare the action
 
-const browse = (req, res) => {
-  if (req.query.q != null) {
-    const filteredPrograms = programs.filter((program) =>
-      program.synopsis.includes(req.query.q)
-    );
-
-    res.json(filteredPrograms);
-  } else {
-    res.json(programs);
-  }
+const browse = async (req, res) => {
+  const programFromDB = await tables.program.readAll();
+  res.json(programFromDB);
 };
 
 const read = (req, res) => {
@@ -46,7 +41,6 @@ const read = (req, res) => {
     res.sendStatus(404);
   }
 };
-
 
 // Export it to import it somewhere else
 
